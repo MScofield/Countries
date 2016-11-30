@@ -1,6 +1,7 @@
 package IronYard;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by scofieldservices on 11/29/16.
@@ -12,6 +13,18 @@ public class Country {
 
     public Country() {
 
+    }
+
+    @Override
+    public String toString() {
+
+
+//        StringBuilder builder = new StringBuilder();
+//        for (IDK) {
+//            builder.append(n.name + "\n")
+
+ //       }
+        return ("["+abbreviation+"]:["+name+"]\n");
     }
 
     public Country(String name, String abbreviation) {

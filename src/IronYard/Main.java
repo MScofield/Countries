@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Scanner;
+import jodd.json.JsonSerializer;
+
 
 public class Main {
-
-
 
 
     public static void main(String[] args) throws Exception {
@@ -30,27 +30,31 @@ public class Main {
             }
 
         }
-    //}
+        //userInput();
+        saveData(country, userInput());
+        System.out.println(country.toString());
+    }
 
-    //public static void userInput () throws Exception {
+        public static String userInput () throws Exception {
             Scanner consoleScanner = new Scanner(System.in);
             System.out.println("Please enter a letter");
             String input = consoleScanner.nextLine();
             if (input.length() > 1) {
                 throw new Exception("Please enter a letter");
             }
-        //}
-
-    //public static void saveData () throws Exception {
-        ArrayList<Country> s = country.get(input.toLowerCase());
-        File b = new File(input + "_Countries.txt");
-        FileWriter fw = new FileWriter(b);
-        for (Country n: s){
-            fw.append(n.name + "\n");
+            return input;
         }
-        fw.close();
 
-    }
-
+        public static void saveData (HashMap<String, ArrayList<Country>> country, String input) throws Exception {
+            ArrayList<Country> s = country.get(input.toLowerCase());
+            File b = new File(input + "_Countries.txt");
+            FileWriter fw = new FileWriter(b);
+            JsonSerializer serial = new JsonSerializer();
+            String json = serial.include("*").serialize(country);
+            for (Country n : s) {
+                fw.append(n.name + "\n");
+            }
+            fw.close();
+        }
 
 }
